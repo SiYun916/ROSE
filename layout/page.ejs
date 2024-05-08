@@ -1,0 +1,23 @@
+<%- partial('_partial/nav') %>
+<!--这里直接复用post中的东西-->
+<div class="postnavbar">
+    <div class="postnavbarimage">
+    </div>
+</div>
+
+<div class="postpage">
+    <div class="postpageblock">
+        <div class="postpagetitle">
+                <%- page.title %>
+        </div>
+        <!--此处进行了修改-->
+        <div class="aboutpagecontent">
+            <%- page.content %>
+        </div>
+
+    </div>
+</div>
+
+<div class="postpagecomment">
+    <%- partial('_partial/comment') %>
+</div>

@@ -1,0 +1,74 @@
+<% 
+    function generateExcerpet(post) {
+        var paragraph = 2
+        var max_excerpt_words = 300
+        var br = 0
+        for(var i = 1; i < paragraph; i++) {
+            br = post.content.indexOf('\n', br+1)
+            if(br < 0) {
+                break
+            }
+        }
+        if(br < 0) {
+            return ""
+        }
+        if(post.content.substring(0, br).length > max_excerpt_words) {
+            return post.content.substring(0, max_excerpt_words)
+        }
+        return post.content.substring(0, br)
+    }
+%>
+
+
+<% page.posts.each(post=> { %>
+    <div class="onepostblock">
+        <!-- 标题以及摘要部分 -->
+        <div class="onepostpart1">
+            <!--时间-->
+            <div class="oneposttime">
+                Post Time: <%- date(post.date, 'YYYY-MM-DD')  %>
+            </div>
+            <!--标题以及链接-->
+            <div class="oneposttitle">
+                <a href="<%- url_for(post.path) %>"> 
+                    <%- post.title %>
+                </a>
+            </div>
+            <!--标签以及分类-->
+            <div class="oneposttandc">
+                <i class="bi bi-box-fill"></i>
+                <span>
+                    <% post.categories.each(category=>{ %>
+                        <a href="<%- url_for(category.path) %>">
+                            <%- category.name %>
+                        </a>
+                    <% }) %>
+                </span>
+
+                <i class="bi bi-tags-fill"></i>
+                <span>
+                    <% post.tags.each(tag=>{%>
+                        <a href="<%- url_for(tag.path) %>">
+                            <%- tag.name %>
+                        </a>
+                    <% }) %>
+                </span>
+            </div>
+
+            <!--摘要-->
+            <div class="onepostexcerpt">
+                <p>
+                    <% if(post.excerpt) { %>
+                        <%- post.excerpt %>
+                    <% } else { %> 
+                        <%- generateExcerpet(post) %>
+                    <% } %>
+                </p>
+            </div>
+        </div>
+
+        <div class="onepostpart2">
+        </div>
+
+    </div>
+<% }) %>

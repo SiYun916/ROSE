@@ -1,0 +1,45 @@
+<%- partial('_partial/nav') %>
+<div class="postnavbar">
+    <div class="postnavbarimage">
+    </div>
+</div>
+
+<div class="postpage">
+    <div class="postpageblock">
+        <div class="postpagetitle">
+                <%- page.title %>
+        </div>
+
+        <div class="postpageinfo">
+            Post Time : <%- date(page.date, 'YYYY-MM-DD HH:mm:ss') %>
+            &emsp;&emsp;&emsp;&emsp;
+            <i class="bi bi-box-fill"></i>
+            <span>
+                <% page.categories.each(category=>{ %>
+                    <a href="<%- url_for(category.path) %>">
+                        <%- category.name %>
+                    </a>
+                <% }) %>
+            </span>
+            &emsp;&emsp;&emsp;&emsp;
+            <i class="bi bi-tags-fill"></i>
+            <span>
+                <% page.tags.each(tag=>{%>
+                    <a href="<%- url_for(tag.path) %>">
+                        <%- tag.name %>
+                    </a>
+                <% }) %>    
+        
+        </div>
+
+        <div class="postcontent">
+            <%- page.content %>
+        </div>
+
+    </div>
+</div>
+
+<div class="postpagecomment">
+    <%- partial('_partial/comment') %>
+</div>
+
